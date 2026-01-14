@@ -1,7 +1,7 @@
 <?php
-$server   = "localhost";
-$username = "root";
-$password = "";
+$server   = "nfi-psikotest-server.mysql.database.azure.com";
+$username = "ukyhzfyqwy";
+$password = "Nfi.600251@#!!!";
 $database = "psikotesonline";
 
 // Buat koneksi
@@ -12,3 +12,4 @@ if (!$koneksi) {
     die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 ?>
+
