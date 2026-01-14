@@ -1,0 +1,56 @@
+/**** Start Background Color ****/
+
+.blue {
+    background: #28ABE3;
+}
+
+.green {
+    background: #72bf48;
+}
+
+.red {
+    background: #FF432E;
+}
+
+.light-red {
+    background: #FB6648;
+}
+
+.light-orange {
+    background: #FA6900;
+}
+
+.color {
+    background: #0ECEAB;
+}
+
+.purple{
+    background: #9b59b6;
+}
+
+
+.card:hover{
+    border: 5px solid rgba(235, 22, 22, 0.7);
+}
+
+.card a {
+    color: #fff;
+    display: block;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.card a p {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.card a i {
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+
+.card:hover a {
+    text-decoration: none;
+}
