@@ -5,6 +5,8 @@ mysqli_real_connect($conn, "nfi-psikotest-server.mysql.database.azure.com", "uky
 
 if (!mysqli_real_connect($conn, "nfi-psikotest-server.mysql.database.azure.com", "ukyhzfyqwy", "Nfi.600251@#!!!", "psikotesonline", 3306, MYSQLI_CLIENT_SSL)) {
     die("Koneksi gagal: " . mysqli_connect_error());
+}
 ?>
+
 
 
