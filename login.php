@@ -49,7 +49,7 @@
               </div>
               <button class="btn btn-lg btn-danger btn-block text-uppercase" type="submit">MASUK</button>
               <hr class="my-4">
-              <a class="btn btn-lg btn-success btn-block text-uppercase" href="pendaftaran">Daftar</a>
+              <a class="btn btn-lg btn-success btn-block text-uppercase" href="pendaftaran.php">Daftar</a>
               <hr class="my-4">
               <p class="text-center">&copy; 2026</p>
             </form>
@@ -68,3 +68,4 @@
 
 
 </html>
+
