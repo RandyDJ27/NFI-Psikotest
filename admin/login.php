@@ -27,7 +27,7 @@
               <div class="card card-signin my-5">
                 <div class="card-body">
                   <h5 class="card-title text-center"><img src="../asset/img/logo-baru.png" alt="" style="height: 40px;">  DASHBOARD ADMIN</h5>
-                  <form class="form-signin" name="form" action="cek_login" id="loginF" method="post">
+                  <form class="form-signin" name="form" action="cek_login.php" id="loginF" method="post">
                     <div class="form-label-group">
                       <input type="text" id="username" name="username" class="form-control" placeholder="Nama Pengguna" required autofocus>
                       <label for="username">Nama Pengguna</label>
@@ -40,7 +40,7 @@
       
                     <button class="btn btn-lg btn-danger btn-block text-uppercase" type="submit">MASUK</button>
                     <hr class="my-4">
-                    <p class="text-center"> &copy; 2025</p>
+                    <p class="text-center"> &copy; 2026</p>
                 </form>
                 </div>
               </div>
@@ -54,4 +54,5 @@
     <script src="asset/js/jquery-3.3.1.slim.min.js"></script>
     <script src="asset/js/popper.min.js"></script>
   </body>
+
 </html>
