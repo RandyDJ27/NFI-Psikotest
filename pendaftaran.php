@@ -37,7 +37,7 @@ include "config/koneksi.php";
 //     mysqli_query($koneksi, $simpan);
 //     echo '<script language="javascript">
 //     alert("Anda Berhasil Melakukan Registrasi");
-//     window.location="index";
+//     window.location="index.php";
 //     </script>';
 //     exit();
 // }
@@ -101,7 +101,7 @@ include "config/koneksi.php";
                 </label>
               </div>
               <button type="submit" class="btn btn-success" name="submit">Daftar</button>
-              <a class="btn btn-danger" href="index">Masuk</a>
+              <a class="btn btn-danger" href="index.php">Masuk</a>
             </form>
           </div>
         </div>
@@ -113,5 +113,6 @@ include "config/koneksi.php";
   <script src="asset/js/bootstrap.bundle.min.js"></script>
   <script src="asset/js/jquery.min.js"></script>
 </body>
+
 
 </html>
