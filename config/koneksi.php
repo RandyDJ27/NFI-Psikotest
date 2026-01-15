@@ -1,14 +1,19 @@
 <?php
-$server   = "nfi-psikotest-server.mysql.database.azure.com";
-$username = "ukyhzfyqwy";
-$password = "Nfi.600251@#!!!";
-$database = "psikotesonline";
+// 1. Definisikan variabel konfigurasi
+$host = "nfi-psikotest-server.mysql.database.azure.com";
+$user = "ukyhzfyqwy";
+$pass = "Nfi.600251@#!!!"; // Ganti dengan password yang benar
+$db   = "psikotestonline";
 
-// Buat koneksi
-$koneksi = mysqli_connect($server, $username, $password, $database);
+// 2. Inisialisasi objek mysqli (Sangat Penting agar tidak NULL)
+$koneksi = mysqli_init();
 
-// Cek koneksi
-if (!$koneksi) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+// 3. Atur SSL (Azure Flexible Server mewajibkan ini secara default)
+mysqli_ssl_set($koneksi, NULL, NULL, NULL, NULL, NULL);
+
+// 4. Melakukan koneksi menggunakan mysqli_real_connect
+// Parameter: objek_koneksi, host, user, password, database, port, flag
+if (!mysqli_real_connect($koneksi, $host, $user, $pass, $db, 3306, MYSQLI_CLIENT_SSL)) {
+    die("Gagal menyambung ke MySQL: " . mysqli_connect_error());
 }
 ?>
