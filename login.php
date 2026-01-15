@@ -51,7 +51,7 @@
               <hr class="my-4">
               <a class="btn btn-lg btn-success btn-block text-uppercase" href="pendaftaran">Daftar</a>
               <hr class="my-4">
-              <p class="text-center">&copy; 2025</p>
+              <p class="text-center">&copy; 2026</p>
             </form>
           </div>
         </div>
@@ -65,5 +65,6 @@
   <script src="asset/js/jquery-3.3.1.slim.min.js"></script>
   <script src="asset/js/popper.min.js"></script>
 </body>
+
 
 </html>
