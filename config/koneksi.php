@@ -3,7 +3,7 @@
 $host = "nfi-psikotest-server.mysql.database.azure.com";
 $user = "ukyhzfyqwy";
 $pass = "Nfi.600251@#!!!"; // Ganti dengan password yang benar
-$db   = "psikotesonline";
+$db   = "psikotestonline";
 
 // 2. Inisialisasi objek mysqli (Sangat Penting agar tidak NULL)
 $conn = mysqli_init();
@@ -19,3 +19,4 @@ if (!mysqli_real_connect($conn, $host, $user, $pass, $db, 3306, MYSQLI_CLIENT_SS
 
 // Koneksi berhasil jika sampai di sini
 ?>
+
