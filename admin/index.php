@@ -1,7 +1,8 @@
-<?php include 'config/koneksi.php'; ?>
+<?php include '../config/koneksi.php'; ?>
 <script>
 
 window.location.href='login.php';
 
 
 </script>
+
