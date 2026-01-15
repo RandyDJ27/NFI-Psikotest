@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo '<script language="javascript">
             alert("Username atau Password salah, atau akun telah diblokir.");
-            window.location="index";
+            window.location="index.php";
         </script>';
         exit();
     }
@@ -41,8 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo '<script language="javascript">
         alert("Akses langsung tidak diperbolehkan!");
-        window.location="index";
+        window.location="index.php";
     </script>';
     exit();
 }
 ?>
+
