@@ -28,7 +28,7 @@ if ($umur > 17) {
     mysqli_query($koneksi, $simpan);
     echo '<script language="javascript">
     alert("Anda Berhasil Melakukan Registrasi");
-    window.location="index";
+    window.location="index.php";
     </script>';
 } elseif ($umur < 17) {
     echo '<script language="javascript">
@@ -40,3 +40,4 @@ if ($umur > 17) {
 // var_dump($tgl);
 
 ?>
+
