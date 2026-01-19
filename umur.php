@@ -1,43 +1,40 @@
 <?php
 include "config/koneksi.php";
 
-// fungsi ngitungna
 function hitung_umur($tgl) {
-    list($year,$month,$day) = explode("-",$tgl);
-    $year_diff = date("Y") - $year;
-    $month_diff = date("m") - $month;
-    $day_diff = date("d") - $day;
-    if ($month_diff < 0) $year_diff--;
-        elseif (( $month_diff==0 ) && ($day_diff < 0)) $year_diff--;
-    return $year_diff;
+    $lahir = new DateTime($tgl);
+    $hari_ini = new DateTime();
+    $diff = $hari_ini->diff($lahir);
+    return $diff->y;
 }
-$tgl_lahir = $_POST['tgl_lahir'];
-$umur = hitung_umur($tgl_lahir);
-// echo $umur;
 
-// logika umur simpan mun umur
-if ($umur > 17) {
-    $simpan="INSERT INTO tbl_user SET username='$_POST[username]',
-                                      password='".md5($_POST['password'])."',
-                                      nama='$_POST[nama]',
-                                      tgl_lahir='$_POST[tgl_lahir]',
-                                      jk='$_POST[jk]',
-                                      email= '$_POST[email]',
-                                      telp='$_POST[telp]',
-                                      alamat='$_POST[alamat]'";
-    mysqli_query($koneksi, $simpan);
-    echo '<script language="javascript">
-    alert("Anda Berhasil Melakukan Registrasi");
-    window.location="index.php";
-    </script>';
-} elseif ($umur < 17) {
-    echo '<script language="javascript">
-    alert("Registrasi Pendaftaran Gagal ! Umur Anda Belum 17 Tahun");
-    window.location="pendaftaran.php";
-    </script>';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tgl_lahir'])) {
+    $tgl_lahir = $_POST['tgl_lahir'];
+    $umur = hitung_umur($tgl_lahir);
+
+    if ($umur >= 17) {
+        // Membersihkan input agar tidak merusak query SQL
+        $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+        $password = md5($_POST['password']);
+        $nama     = mysqli_real_escape_string($koneksi, $_POST['nama']);
+        $jk       = mysqli_real_escape_string($koneksi, $_POST['jk']);
+        $email    = mysqli_real_escape_string($koneksi, $_POST['email']);
+        $telp     = mysqli_real_escape_string($koneksi, $_POST['telp']);
+        $alamat   = mysqli_real_escape_string($koneksi, $_POST['alamat']);
+
+        $simpan = "INSERT INTO tbl_user (username, password, nama, tgl_lahir, jk, email, telp, alamat) 
+                   VALUES ('$username', '$password', '$nama', '$tgl_lahir', '$jk', '$email', '$telp', '$alamat')";
+        
+        if (mysqli_query($koneksi, $simpan)) {
+            echo '<script>alert("Anda Berhasil Melakukan Registrasi"); window.location="index.php";</script>';
+        } else {
+            // Jika ini muncul, berarti ada yang salah dengan tabel/database kamu
+            die("Gagal simpan ke database: " . mysqli_error($koneksi));
+        }
+    } else {
+        echo '<script>alert("Registrasi Gagal! Umur Anda Belum 17 Tahun"); window.location="pendaftaran.php";</script>';
+    }
+} else {
+    header("Location: pendaftaran.php");
 }
-// $tgl = $_POST['tgl_lahir'];
-// var_dump($tgl);
-
 ?>
-
