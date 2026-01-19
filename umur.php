@@ -1,40 +1,12 @@
 <?php
-include "config/koneksi.php";
+$tgl_lahir = $_POST['tgl_lahir'];
+// Fungsi hitung umur sederhana
+$umur = date("Y") - date("Y", strtotime($tgl_lahir));
 
-function hitung_umur($tgl) {
-    $lahir = new DateTime($tgl);
-    $hari_ini = new DateTime();
-    $diff = $hari_ini->diff($lahir);
-    return $diff->y;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tgl_lahir'])) {
-    $tgl_lahir = $_POST['tgl_lahir'];
-    $umur = hitung_umur($tgl_lahir);
-
-    if ($umur >= 17) {
-        // Membersihkan input agar tidak merusak query SQL
-        $username = mysqli_real_escape_string($koneksi, $_POST['username']);
-        $password = md5($_POST['password']);
-        $nama     = mysqli_real_escape_string($koneksi, $_POST['nama']);
-        $jk       = mysqli_real_escape_string($koneksi, $_POST['jk']);
-        $email    = mysqli_real_escape_string($koneksi, $_POST['email']);
-        $telp     = mysqli_real_escape_string($koneksi, $_POST['telp']);
-        $alamat   = mysqli_real_escape_string($koneksi, $_POST['alamat']);
-
-        $simpan = "INSERT INTO tbl_user (username, password, nama, tgl_lahir, jk, email, telp, alamat) 
-                   VALUES ('$username', '$password', '$nama', '$tgl_lahir', '$jk', '$email', '$telp', '$alamat')";
-        
-        if (mysqli_query($koneksi, $simpan)) {
-            echo '<script>alert("Anda Berhasil Melakukan Registrasi"); window.location="index.php";</script>';
-        } else {
-            // Jika ini muncul, berarti ada yang salah dengan tabel/database kamu
-            die("Gagal simpan ke database: " . mysqli_error($koneksi));
-        }
-    } else {
-        echo '<script>alert("Registrasi Gagal! Umur Anda Belum 17 Tahun"); window.location="pendaftaran.php";</script>';
-    }
+if ($umur >= 17) {
+    echo "<h1>Umur kamu $umur. Kamu lolos tapi ini tes tanpa database.</h1>";
+    echo "<a href='pendaftaran.php'>Kembali</a>";
 } else {
-    header("Location: pendaftaran.php");
+    echo "<h1>Umur kamu $umur. Belum cukup umur.</h1>";
 }
 ?>
