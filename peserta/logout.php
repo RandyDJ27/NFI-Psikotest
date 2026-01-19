@@ -4,8 +4,9 @@ session_start();
 session_destroy();
 	echo '<script language="javascript">
 	alert("Terima kasih . Anda Berhasil Logout");
-	window.location="../login.php";
+	window.location="index.php";
 	</script>';
 
 
 ?>
+
