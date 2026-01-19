@@ -33,9 +33,10 @@ if ($umur > 17) {
 } elseif ($umur < 17) {
     echo '<script language="javascript">
     alert("Registrasi Pendaftaran Gagal ! Umur Anda Belum 17 Tahun");
-    window.location="pendaftaran";
+    window.location="pendaftaran.php";
     </script>';
 }
 // $tgl = $_POST['tgl_lahir'];
 // var_dump($tgl);
+
 ?>
