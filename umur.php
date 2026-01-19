@@ -28,15 +28,14 @@ if ($umur > 17) {
     mysqli_query($koneksi, $simpan);
     echo '<script language="javascript">
     alert("Anda Berhasil Melakukan Registrasi");
-    window.location="index.php";
+    window.location="index";
     </script>';
 } elseif ($umur < 17) {
     echo '<script language="javascript">
     alert("Registrasi Pendaftaran Gagal ! Umur Anda Belum 17 Tahun");
-    window.location="pendaftaran.php";
+    window.location="pendaftaran";
     </script>';
 }
 // $tgl = $_POST['tgl_lahir'];
 // var_dump($tgl);
-
 ?>
