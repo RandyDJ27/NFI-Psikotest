@@ -235,7 +235,7 @@ switch ($act) {
                             <textarea name='soal' style='width: 950px; height: 350px;'>$r[soal]</textarea>
                           </div>
                         </div>";
-                        if ($r[gambar]!=''){
+                        if ($r['gambar']!=''){
 
                         echo "
                         <div class='form-group'>
@@ -383,3 +383,4 @@ switch ($act) {
   </script>
 </div>
 </div>
+
