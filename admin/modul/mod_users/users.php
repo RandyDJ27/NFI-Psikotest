@@ -90,7 +90,7 @@ switch ($act) {
 // cetak
 echo "<div class='row'>
 <div class='col-lg-6'>
-    <a class='btn btn-warning' href='cetak/cetakpeserta' role='button' target='_blank' rel='noopener noreferrer'><span class='fa fa-print fa-fw mr-3'></span>Cetak</a>
+    <a class='btn btn-warning' href='cetak/cetakpeserta.php' role='button' target='_blank' rel='noopener noreferrer'><span class='fa fa-print fa-fw mr-3'></span>Cetak</a>
 </div>";
 //   Cari
   echo "<div col-lg-6>
@@ -199,4 +199,5 @@ echo"</datalist></form>
 
 
 </div>
+
 </div>
