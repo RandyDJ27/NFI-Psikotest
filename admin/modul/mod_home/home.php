@@ -71,6 +71,13 @@ $total_soal = $r_soal['jum'] ?? 0;
                     <span class="menu-collapsed">Pengguna</span>
                 </div>
             </a>
+            <a href="?module=tentang"
+                class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-laptop fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Tentang</span>
+                </div>
+            </a>
             <a href="logout.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
@@ -183,6 +190,7 @@ $total_soal = $r_soal['jum'] ?? 0;
         </div>
     </div>
 </div>
+
 
 
 
