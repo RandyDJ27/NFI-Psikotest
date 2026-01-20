@@ -76,7 +76,7 @@ if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
 }
 else{
   // PERBAIKAN 2: Tambahkan .php pada variabel aksi agar tidak 404 Not Found
-  $aksi="mod_soal/aksi_soal.php";
+  $aksi="modul/mod_soal/aksi_soal.php";
   $act = isset($_GET['act']) ? $_GET['act'] : '';
 
   switch ($act) {
@@ -242,4 +242,5 @@ else{
     $('#knc_jawaban').val('<?php echo $r['knc_jawaban']; ?>');
   <?php } ?>
 </script>
+
 
