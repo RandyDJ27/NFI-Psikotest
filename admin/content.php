@@ -7,19 +7,19 @@ include_once $base_path . "/../config/library.php";
 include_once $base_path . "/../config/fungsi_indotgl.php";
 
 if (isset($_GET['module'])) {
-    $module = $_GET['module'];
+    // FIX: Hapus ".php" jika user/sistem tidak sengaja mengirimkan ekstensi di URL
+    $module = str_replace('.php', '', $_GET['module']);
 
     switch ($module) {
         case 'home':
-            // Kita cek satu per satu filenya
             $file_home = $base_path . "/modul/mod_home/home.php";
             if (file_exists($file_home)) {
                 include $file_home;
             } else {
-                echo "<div style='color:red; padding:20px; background:#fff;'>
-                        <h3>Error Log:</h3>
-                        File tidak ditemukan di: <b>$file_home</b> <br>
-                        Pastikan folder 'modul' dan 'mod_home' ada di dalam folder 'admin'.
+                echo "<div style='color:red; padding:20px; background:#fff; border:1px solid red;'>
+                        <h3>⚠️ Modul Home Tidak Ditemukan</h3>
+                        File tidak ada di: <b>$file_home</b> <br>
+                        Silakan cek apakah folder <b>modul/mod_home/</b> sudah terupload ke Azure.
                       </div>";
             }
             break;
@@ -49,17 +49,16 @@ if (isset($_GET['module'])) {
             break;
 
         default:
-            echo "Modul <b>$module</b> tidak terdaftar di sistem.";
+            echo "<div style='padding:20px;'>Modul <b>$module</b> tidak terdaftar di sistem.</div>";
             break;
     }
 } else {
-    // Jika tidak ada module, jangan redirect pakai header (rawan 404 di Azure)
-    // Cukup panggil home secara manual
+    // Tampilan default jika tidak ada parameter module
     $file_default = $base_path . "/modul/mod_home/home.php";
     if (file_exists($file_default)) {
         include $file_default;
     } else {
-        echo "Selamat Datang. (File home.php tidak ditemukan)";
+        echo "<div style='padding:20px;'>Selamat Datang. (File home.php belum tersedia)</div>";
     }
 }
 ?>
