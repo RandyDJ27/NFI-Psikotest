@@ -1,7 +1,7 @@
 <?php 
 // Menggunakan path yang lebih aman untuk Azure
-include(__DIR__ . '../../config/koneksi.php');
-include(__DIR__ . '../../config/fungsi_thumb.php');
+include(__DIR__ . '/../../config/koneksi.php');
+include(__DIR__ . '/../../config/fungsi_thumb.php');
 
 // Pastikan session sudah dimulai karena ada penggunaan $_SESSION[username] di bawah
 if (session_status() == PHP_SESSION_NONE) {
@@ -183,4 +183,5 @@ $total_soal = $r_soal['jum'] ?? 0;
         </div>
     </div>
 </div>
+
 
