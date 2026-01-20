@@ -43,16 +43,17 @@ if ($module === 'soal' && $act === 'input') {
             )");
     } else {
         mysqli_query($koneksi, "INSERT INTO tbl_soal
-(soal,a,b,c,d,knc_jawaban,gambar)
-VALUES (
-  '$_POST[soal]',
-  '$_POST[a]',
-  '$_POST[b]',
-  '$_POST[c]',
-  '$_POST[d]',
-  '$_POST[knc_jawaban]',
-  ''
-)");
+            (soal,a,b,c,d,knc_jawaban,gambar)
+            VALUES (
+                '$_POST[soal]',
+                '$_POST[a]',
+                '$_POST[b]',
+                '$_POST[c]',
+                '$_POST[d]',
+                '$_POST[knc_jawaban]',
+                ''
+            )");
+    }
 
     header("Location: ../../media.php?module=soal");
     exit;
