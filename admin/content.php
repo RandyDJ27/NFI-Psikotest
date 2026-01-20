@@ -1,53 +1,65 @@
 <?php
-// Gunakan include_once agar tidak terjadi error jika file sudah dipanggil di media.php
-include_once "../config/koneksi.php";
-include_once "../config/library.php";
-include_once "../config/fungsi_indotgl.php";
+// Gunakan path absolut agar Azure tidak bingung mencari posisi file
+$base_path = __DIR__; 
+
+include_once $base_path . "/../config/koneksi.php";
+include_once $base_path . "/../config/library.php";
+include_once $base_path . "/../config/fungsi_indotgl.php";
 
 if (isset($_GET['module'])) {
     $module = $_GET['module'];
 
     switch ($module) {
         case 'home':
-            // Cek apakah file home.php benar-benar ada di folder tersebut
-            $file = "modul/mod_home/home.php";
-            if (file_exists($file)) {
-                include $file;
+            // Kita cek satu per satu filenya
+            $file_home = $base_path . "/modul/mod_home/home.php";
+            if (file_exists($file_home)) {
+                include $file_home;
             } else {
-                echo "<p>Error: File <b>$file</b> tidak ditemukan di server Azure.</p>";
+                echo "<div style='color:red; padding:20px; background:#fff;'>
+                        <h3>Error Log:</h3>
+                        File tidak ditemukan di: <b>$file_home</b> <br>
+                        Pastikan folder 'modul' dan 'mod_home' ada di dalam folder 'admin'.
+                      </div>";
             }
             break;
 
         case 'soal':
-            include "modul/mod_soal/soal.php";
+            include $base_path . "/modul/mod_soal/soal.php";
             break;
 
         case 'hasiltes':
-            include "modul/mod_hasiltes/hasiltes.php";
+            include $base_path . "/modul/mod_hasiltes/hasiltes.php";
             break;
 
         case 'pengaturantes':
-            include "modul/mod_pengaturantes/pengaturantes.php";
+            include $base_path . "/modul/mod_pengaturantes/pengaturantes.php";
             break;
 
         case 'users':
-            include "modul/mod_users/users.php";
+            include $base_path . "/modul/mod_users/users.php";
             break;
 
         case 'pengguna':
-            include "modul/mod_pengguna/pengguna.php";
+            include $base_path . "/modul/mod_pengguna/pengguna.php";
             break;
 
         case 'tentang':
-            include "modul/mod_tentang/tentang.php";
+            include $base_path . "/modul/mod_tentang/tentang.php";
             break;
 
         default:
-            echo "<p>404 Halaman modul <b>$module</b> tidak ditemukan.</p>";
+            echo "Modul <b>$module</b> tidak terdaftar di sistem.";
             break;
     }
 } else {
-    // Arahkan ke media.php dengan parameter module
-    echo "<script>window.location='media.php?module=home';</script>";
+    // Jika tidak ada module, jangan redirect pakai header (rawan 404 di Azure)
+    // Cukup panggil home secara manual
+    $file_default = $base_path . "/modul/mod_home/home.php";
+    if (file_exists($file_default)) {
+        include $file_default;
+    } else {
+        echo "Selamat Datang. (File home.php tidak ditemukan)";
+    }
 }
 ?>
