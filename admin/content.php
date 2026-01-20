@@ -9,7 +9,7 @@ if (isset($_GET['module'])) {
     switch ($module) {
         case 'home':
             include "sidebar.php";
-            include "modul/mod_home/home.php";
+            include "modul/mod_home/home";
             break;
 
         case 'soal':
@@ -50,3 +50,4 @@ if (isset($_GET['module'])) {
     header("Location: media.php?module=home");
 }
 ?>
+
