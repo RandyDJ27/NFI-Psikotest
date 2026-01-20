@@ -90,7 +90,7 @@ switch ($act) {
 ?>
         <div class='row mb-3 align-items-center'>
             <div class='col-lg-5'>
-                <a class='btn btn-warning' href='cetak/cetakhasiltes' role='button' target='_blank'><span class='fa fa-print fa-fw mr-2'></span>Cetak</a>
+                <a class='btn btn-warning' href='cetak/cetakhasiltes.php' role='button' target='_blank'><span class='fa fa-print fa-fw mr-2'></span>Cetak</a>
                 <a class='btn btn-success' href='?module=hasiltes&act=lulus' role='button'><i class='fa fa-user-check fa-fw mr-2'></i>Lulus</a>
                 <a class='btn btn-danger' href='?module=hasiltes&act=tidaklulus' role='button'><i class='fa fa-user-slash fa-fw mr-2'></i>Tidak Lulus</a>  
             </div>
@@ -251,4 +251,5 @@ switch ($act) {
             </div>
         </div>
     </div>
+
 </div>
