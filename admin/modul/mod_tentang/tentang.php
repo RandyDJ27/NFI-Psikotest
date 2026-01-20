@@ -113,9 +113,9 @@
                                     </a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="http://instagram.com/blogbugabagi" target="_blank"
+                                    <a href="https://www.instagram.com/nissinfoodsid/" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="http://localhost/psikotes/asset/img/fb.png" alt="" srcset="">
+                                        <img src="../asset/img/ig.png" alt="" srcset="">
                                     </a>
                                 </div>
                             </div>
@@ -137,5 +137,6 @@
 </div>
 
 </div>
+
 
 
