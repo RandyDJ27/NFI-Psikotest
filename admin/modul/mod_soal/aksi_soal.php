@@ -43,7 +43,7 @@ if ($module === 'soal' && $act === 'input') {
             )");
     } else {
         mysqli_query($koneksi, "INSERT INTO tbl_soal
-            (soal,a,b,c,d,knc_jawaban)
+            (soal,a,b,c,d,knc_jawaban,gambar)
             VALUES (
                 '$_POST[soal]',
                 '$_POST[a]',
@@ -115,3 +115,4 @@ elseif ($module === 'soal' && $act === 'aktif') {
     header("Location: ../../media.php?module=soal");
     exit;
 }
+
