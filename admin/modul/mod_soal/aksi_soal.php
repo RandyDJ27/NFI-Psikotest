@@ -1,22 +1,26 @@
 <?php
 session_start();
+
 // Jika session kosong, tendang ke login
 if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
-    echo "<link href='style.css' rel='stylesheet' type='text/css'>
-    <center>Untuk mengakses modul, Anda harus login <br>";
+    echo "<center>Untuk mengakses modul, Anda harus login <br>";
     echo "<a href=../../index.php><b>LOGIN</b></a></center>";
 }
 else {
-    // Jalur absolut agar Azure tidak bingung mencari file
-    include_once __DIR__ . "../../config/koneksi.php";
-    include_once __DIR__ . "../../config/library.php";
-    include_once __DIR__ . "../../config/fungsi_thumb.php";
+    // Jalur absolut agar Azure tidak bingung mencari file config
+    // Karena posisi file ini di admin/modul/mod_soal/, maka naik 2 tingkat (../../)
+    include_once "../../config/koneksi.php";
+    include_once "../../config/library.php";
+    include_once "../../config/fungsi_thumb.php";
 
-    // Gunakan tanda kutip untuk index array $_GET
-    $module = $_GET['module'];
-    $act    = $_GET['act'];
+    $module = isset($_GET['module']) ? $_GET['module'] : '';
+    $act    = isset($_GET['act']) ? $_GET['act'] : '';
 
-    // Input soal
+    // Pastikan variabel tanggal ada (biasanya dari library.php)
+    // Jika tidak ada, kita buat manual agar query tidak error
+    if(!isset($tgl_sekarang)) { $tgl_sekarang = date("Y-m-d"); }
+
+    // --- INPUT SOAL ---
     if ($module=='soal' && $act=='input'){
         $lokasi_file    = $_FILES['fupload']['tmp_name'];
         $nama_file      = $_FILES['fupload']['name'];
@@ -35,13 +39,13 @@ else {
         header('location:../../media.php?module='.$module);
     }
 
-    // Hapus Soal
+    // --- HAPUS SOAL ---
     elseif ($module=='soal' && $act=='hapus') {
         mysqli_query($koneksi, "DELETE FROM tbl_soal WHERE id_soal='$_GET[id]'");
         header('location:../../media.php?module='.$module);
     }
 
-    // Update soal
+    // --- UPDATE SOAL ---
     elseif ($module=='soal' && $act=='update'){
         $lokasi_file    = $_FILES['fupload']['tmp_name'];
         $nama_file      = $_FILES['fupload']['name'];
@@ -49,7 +53,6 @@ else {
         $nama_file_unik = $acak.$nama_file; 
 
         if (empty($lokasi_file)){
-            // FIX: Ganti mysql_query menjadi mysqli_query (pakai 'i')
             mysqli_query($koneksi, "UPDATE tbl_soal SET soal = '$_POST[soal]', a = '$_POST[a]', b = '$_POST[b]', c = '$_POST[c]', d = '$_POST[d]', knc_jawaban = '$_POST[knc_jawaban]' WHERE id_soal = '$_POST[id]'");
         }
         else {
@@ -59,12 +62,11 @@ else {
         header('location:../../media.php?module='.$module);
     }
 
-    // Aktifkan/Nonaktifkan
+    // --- STATUS AKTIF/NON-AKTIF ---
     elseif ($module=='soal' && ($act=='nonaktif' || $act=='aktif')){
-        $aktif = ($act == 'aktif') ? 'Y' : 'N';
-        mysqli_query($koneksi, "UPDATE tbl_soal SET aktif = '$aktif' WHERE id_soal='$_GET[id]'");
+        $status = ($act == 'aktif') ? 'Y' : 'N';
+        mysqli_query($koneksi, "UPDATE tbl_soal SET aktif = '$status' WHERE id_soal='$_GET[id]'");
         header('location:../../media.php?module='.$module);
     }
 }
 ?>
-
