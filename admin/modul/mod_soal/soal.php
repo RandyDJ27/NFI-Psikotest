@@ -4,43 +4,43 @@
       <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
         <small>MENU</small>
       </li>
-      <a href="?module=home" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=home.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fas fa-home fa-fw mr-3"></span>
           <span class="menu-collapsed">Beranda</span>
         </div>
       </a>
-      <a href="?module=soal" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=soal.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-tasks fa-fw mr-3"></span>
           <span class="menu-collapsed">Kelola Soal Tes</span>
         </div>
       </a>
-      <a href="?module=hasiltes" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=hasiltes.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-file-alt fa-fw mr-3"></span>
           <span class="menu-collapsed">Hasil Tes</span>
         </div>
       </a>
-      <a href="?module=pengaturantes" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=pengaturantes.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-tools fa-fw mr-3"></span>
           <span class="menu-collapsed">Pengaturan Tes</span>
         </div>
       </a>
-      <a href="?module=users" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=users.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-users fa-fw mr-3"></span>
           <span class="menu-collapsed">Daftar Peserta</span>
         </div>
       </a>
-      <a href="?module=pengguna" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=pengguna.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-user-alt fa-fw mr-3"></span>
           <span class="menu-collapsed">Pengguna</span>
         </div>
       </a>
-      <a href="?module=tentang" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+      <a href="?module=tentang.php" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-laptop fa-fw mr-3"></span>
           <span class="menu-collapsed">Tentang</span>
@@ -83,7 +83,7 @@ else{
     default:
       echo "<div class='row'><div class='col-lg-6'>
       <input class='btn btn-primary' type=button value='Tambah Soal' 
-      onclick=\"window.location.href='?module=soal&act=tambahsoal';\"></div>";
+      onclick=\"window.location.href='?module.php=soal&act=tambahsoal';\"></div>";
 
       echo "<div col-lg-6>
             <form class='form-inline' method='POST' action='?module=soal&act=carisoal'>
@@ -111,9 +111,9 @@ else{
               <td><a class='btn btn-outline-info' href='?module=soal&act=viewsoal&id=$r[id_soal]'><i class='fa fa-eye mr-1'></i>Lihat</a></td>";
         
         if ($r['aktif']=="Y") {
-          echo"<td><input type=button class='btn btn-outline-dark' value='Non Aktifkan' onclick=\"window.location.href='$aksi?module=soal&act=nonaktif&id=$r[id_soal]';\"></td>";
+          echo"<td><input type=button class='btn btn-outline-dark' value='Non Aktifkan' onclick=\"window.location.href='$aksi?module.php=soal&act=nonaktif&id=$r[id_soal]';\"></td>";
         } else {
-          echo"<td align='center'><input class='btn btn-outline-success' type=button value='Aktifkan' onclick=\"window.location.href='$aksi?module=soal&act=aktif&id=$r[id_soal]';\"></td>";
+          echo"<td align='center'><input class='btn btn-outline-success' type=button value='Aktifkan' onclick=\"window.location.href='$aksi?module.php=soal&act=aktif&id=$r[id_soal]';\"></td>";
         }
         echo "</tr>";
         $no++;
@@ -169,7 +169,7 @@ else{
       $edit=mysqli_query($koneksi, "SELECT * FROM tbl_soal WHERE id_soal='$_GET[id]'");
       $r=mysqli_fetch_array($edit);
       echo "<h2 class='mb-3'><i class='fa fa-edit mr-2'></i>Edit Soal</h2><hr/>
-            <form method=POST action='$aksi?module=soal&act=update' enctype='multipart/form-data'>
+            <form method=POST action='$aksi?module.php=soal&act=update' enctype='multipart/form-data'>
             <input type=hidden name=id value='$r[id_soal]'>
               <div class='form-group'>
                 <label class='col-sm-2'>Pertanyaan</label>
@@ -242,6 +242,7 @@ else{
     $('#knc_jawaban').val('<?php echo $r['knc_jawaban']; ?>');
   <?php } ?>
 </script>
+
 
 
 
