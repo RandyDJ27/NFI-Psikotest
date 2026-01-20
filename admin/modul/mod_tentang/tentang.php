@@ -103,13 +103,13 @@
                                 <div class="col-md-4">
                                     <a href="https://nissinfoods.co.id/" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="http://localhost/psikotes/asset/img/logo-baru.png" alt="" srcset="">
+                                        <img src="asset/img/logo-baru.png" alt="" srcset="">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="https://servicedesk.nissinfoods.co.id" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="http://localhost/psikotes/asset/img/sdp.png" alt="" srcset="">
+                                        <img src="asset/img/sdp.png" alt="" srcset="">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
@@ -135,4 +135,5 @@
 
 
 </div>
+
 </div>
