@@ -8,9 +8,9 @@ if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
 }
 else {
     // Jalur absolut agar Azure tidak bingung mencari file
-    include_once __DIR__ . "/../../../config/koneksi.php";
-    include_once __DIR__ . "/../../../config/library.php";
-    include_once __DIR__ . "/../../../config/fungsi_thumb.php";
+    include_once __DIR__ . "../../config/koneksi.php";
+    include_once __DIR__ . "../../config/library.php";
+    include_once __DIR__ . "../../config/fungsi_thumb.php";
 
     // Gunakan tanda kutip untuk index array $_GET
     $module = $_GET['module'];
@@ -67,3 +67,4 @@ else {
     }
 }
 ?>
+
