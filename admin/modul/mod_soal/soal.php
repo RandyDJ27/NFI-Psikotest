@@ -123,7 +123,7 @@ else{
   
     case "tambahsoal":
       echo "<h2 class='mb-3'><i class='fa fa-plus mr-2'></i>Tambah Soal</h2><hr/>
-            <form method=POST action='$aksi?module=soal&act=input' enctype='multipart/form-data'>
+            <form method=POST action='$aksi?module.php=soal&act=input' enctype='multipart/form-data'>
               <div class='form-group'>
                 <label class='col-sm-2'>Soal</label>
                 <div class='col-sm-10'><textarea name='soal' style='width: 100%; height: 200px;'></textarea></div>
@@ -242,5 +242,6 @@ else{
     $('#knc_jawaban').val('<?php echo $r['knc_jawaban']; ?>');
   <?php } ?>
 </script>
+
 
 
