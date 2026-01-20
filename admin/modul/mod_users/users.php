@@ -47,7 +47,7 @@
           <span class="menu-collapsed">Tentang</span>
         </div>
       </a>
-      <a href="http://localhost/psikotes/admin/logout.php"
+      <a href="logout.php"
         class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-start align-items-center">
           <span class="fa fa-sign-out-alt fa-fw mr-3"></span>
@@ -201,3 +201,4 @@ echo"</datalist></form>
 </div>
 
 </div>
+
