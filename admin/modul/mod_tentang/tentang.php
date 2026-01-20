@@ -84,7 +84,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="http://localhost/psikotes/asset/img/logo-baru.png" width="70%" alt="" srcset="">
+                                    <img src="../asset/img/logo-baru.png" width="70%" alt="" srcset="">
                                 </div>
                                 <div class="col-md-9">
                                     <p class="light">Aplikasi Psikotes Online merupakan program pelaksanaan kegiatan tes
@@ -103,13 +103,13 @@
                                 <div class="col-md-4">
                                     <a href="https://nissinfoods.co.id/" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="asset/img/logo-baru.png" alt="" srcset="">
+                                        <img src="../asset/img/logo-baru.png" alt="" srcset="">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="https://servicedesk.nissinfoods.co.id" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="asset/img/sdp.png" alt="" srcset="">
+                                        <img src="../asset/img/sdp.png" alt="" srcset="">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
@@ -137,4 +137,5 @@
 </div>
 
 </div>
+
 
