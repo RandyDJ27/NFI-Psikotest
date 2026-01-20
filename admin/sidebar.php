@@ -1,12 +1,10 @@
 <?php include('../config/koneksi.php'); ?>
 
-<nav class="navbar navbar-dark bg-danger shadow-sm">
-  <div class="container-fluid">
-    
-    <a class="navbar-brand d-flex align-items-center" href="media.php?module=home">
-      <img src="http://localhost/psikotes/asset/img/logo-baru.png" width="45" height="35" class="d-inline-block align-top mr-2">
-      <span style="font-size: 18px; font-weight: bold;">Admin Psikotes</span>
-    </a>
+<nav class="navbar navbar-expand-md navbar-dark bg-danger shadow-sm">
+  <a class="navbar-brand d-flex align-items-center" href="media.php?module=home">
+    <img src="../asset/img/logo-baru.png" width="45" height="35" class="mr-2">
+    <strong>Admin Psikotes</strong>
+  </a>
 
     <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
@@ -64,4 +62,5 @@
       padding: 12px 5px;
     }
   }
+
 </style>
