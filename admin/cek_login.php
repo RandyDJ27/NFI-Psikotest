@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $r['username'];
         $_SESSION['idadmin']  = $r['id_admin'];
 
-        header('Location: media?module=home.php');
+        header('Location: media.php?module=home.php');
         exit();
     } else {
         echo '<script language="javascript">
@@ -46,5 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
 
 
