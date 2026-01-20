@@ -1,4 +1,4 @@
-<?php include('../config/koneksi.php'); ?>
+<?php require_once __DIR__ . '/koneksi.php'; ?>
 <?php
 date_default_timezone_set('Asia/Jakarta'); // PHP 6 mengharuskan penyebutan timezone.
 $seminggu = array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu");
@@ -15,3 +15,4 @@ $nama_bln=array(1=> "Januari", "Februari", "Maret", "April", "Mei",
                     "Juni", "Juli", "Agustus", "September", 
                     "Oktober", "November", "Desember");
 ?>
+
