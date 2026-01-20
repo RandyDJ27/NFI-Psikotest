@@ -31,6 +31,13 @@ if ($sesi_username == NULL || empty($sesi_username)) {
 </head>
 
 <body>
+    <div id="wrapper">
+
+    <!-- SIDEBAR / HEADER ADMIN -->
+    <?php
+      require_once __DIR__ . '/sidebar.php';
+    ?>
+
   <div id="wrapper">
     <?php
     if (file_exists('content.php')) {
@@ -47,3 +54,4 @@ if ($sesi_username == NULL || empty($sesi_username)) {
   <script src="../asset/js/bootstrap.min.js"></script>
 </body>
 </html>
+
