@@ -1,11 +1,11 @@
-<?php include('../config/koneksi.php');
+<?php 
+include('../config/koneksi.php');
 ob_start();
 session_start();
 
 // Tampilkan error agar mudah debug
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 
 $sesi_username = isset($_SESSION['username']) ? $_SESSION['username'] : NULL;
 if ($sesi_username == NULL || empty($sesi_username)) {
@@ -32,17 +32,16 @@ if ($sesi_username == NULL || empty($sesi_username)) {
 
 <body>
   <div id="wrapper">
-    <!-- Navigasi -->
     <?php
     if (file_exists('content.php')) {
         include 'content.php';
     } else {
-        echo "<p style='color:red;text-align:center;'>⚠️ File content.php tidak ditemukan!</p>";
+        echo "<p style='color:red;text-align:center;padding:50px;'>⚠️ File content.php tidak ditemukan di direktori admin!</p>";
     }
     ?>
   </div>
 
-  <script src="http://localhost/psikotes/asset/dist/sweetalert2.all.min.js"></script>
+  <script src="../asset/dist/sweetalert2.all.min.js"></script>
   <script src="../asset/js/jquery-3.3.1.slim.min.js"></script>
   <script src="../asset/js/popper.min.js"></script>
   <script src="../asset/js/bootstrap.min.js"></script>
