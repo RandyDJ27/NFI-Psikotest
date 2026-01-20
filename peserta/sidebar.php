@@ -4,7 +4,7 @@
   <div class="container-fluid">
     
     <a class="navbar-brand d-flex align-items-center" href="media.php?hal=home">
-      <img src="http://localhost/psikotes/asset/img/logo-baru.png" width="45" height="35" class="d-inline-block align-top mr-2">
+      <img src="asset/img/logo-baru.png" width="45" height="35" class="d-inline-block align-top mr-2">
       <span style="font-size: 16px; font-weight: bold;">Psikotes Online</span>
     </a>
 
@@ -49,4 +49,5 @@
       display: none !important;
     }
   }
+
 </style>
