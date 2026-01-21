@@ -344,7 +344,7 @@ switch ($act) {
              <td align='center'>
         <a class='btn btn-outline-primary' href=?module=soal&act=editsoal&id=$r[id_soal] role='button'><i class='fa fa-edit mr-1'></i></a>
         <a class='btn btn-outline-danger' href=$aksi?module=soal&act=hapus&id=$r[id_soal] role='button'><i class='fa fa-trash mr-1'></i></a></td>";
-        if ($r[aktif]=="Y") {
+        if ($r['aktif']=="Y") {
           echo"<td align='center'><input class='btn btn-outline-dark' type=button value='Non Aktifkan' onclick=\"window.location.href='$aksi?module=soal&act=nonaktif&id=$r[id_soal]';\"></td>";
 
         }else {
@@ -383,5 +383,6 @@ switch ($act) {
   </script>
 </div>
 </div>
+
 
 
