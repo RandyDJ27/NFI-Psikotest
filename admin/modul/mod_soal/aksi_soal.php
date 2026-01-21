@@ -29,36 +29,37 @@ if ($module === 'soal' && $act === 'input') {
 
     if (!empty($lokasi_file)) {
         UploadBanner($nama_file_unik);
-        mysqli_query($koneksi, "INSERT INTO tbl_soal
-            (soal,a,b,c,d,knc_jawaban,tanggal,gambar)
-            VALUES (
-                '$_POST[soal]',
-                '$_POST[a]',
-                '$_POST[b]',
-                '$_POST[c]',
-                '$_POST[d]',
-                '$_POST[knc_jawaban]',
-                '$tgl_sekarang',
-                '$nama_file_unik'
-            )");
+        $gambar = $nama_file_unik;
     } else {
-        mysqli_query($koneksi, "INSERT INTO tbl_soal
-        (soal,a,b,c,d,knc_jawaban,tanggal,gambar)
-        VALUES (
-            '$_POST[soal]',
-            '$_POST[a]',
-            '$_POST[b]',
-            '$_POST[c]',
-            '$_POST[d]',
-            '$_POST[knc_jawaban]',
-            '$tgl_sekarang',
-            ''
-            )");
+        $gambar = '';
     }
+
+    $sql = "INSERT INTO tbl_soal
+        (soal,a,b,c,d,knc_jawaban,tanggal,gambar)
+        VALUES (?,?,?,?,?,?,?,?)";
+
+    $stmt = mysqli_prepare($koneksi, $sql);
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "ssssssss",
+        $_POST['soal'],
+        $_POST['a'],
+        $_POST['b'],
+        $_POST['c'],
+        $_POST['d'],
+        $_POST['knc_jawaban'],
+        $tgl_sekarang,
+        $gambar
+    );
+
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 
     header("Location: ../../media.php?module=soal");
     exit;
 }
+
 
 // ================= HAPUS SOAL =================
 elseif ($module === 'soal' && $act === 'hapus') {
@@ -77,26 +78,49 @@ elseif ($module === 'soal' && $act === 'update') {
     $nama_file_unik = $acak . $nama_file;
 
     if (empty($lokasi_file)) {
-        mysqli_query($koneksi, "UPDATE tbl_soal SET
-            soal='$_POST[soal]',
-            a='$_POST[a]',
-            b='$_POST[b]',
-            c='$_POST[c]',
-            d='$_POST[d]',
-            knc_jawaban='$_POST[knc_jawaban]'
-            WHERE id_soal='$_POST[id]'");
+
+        $sql = "UPDATE tbl_soal SET
+            soal=?, a=?, b=?, c=?, d=?, knc_jawaban=?
+            WHERE id_soal=?";
+
+        $stmt = mysqli_prepare($koneksi, $sql);
+        mysqli_stmt_bind_param(
+            $stmt,
+            "ssssssi",
+            $_POST['soal'],
+            $_POST['a'],
+            $_POST['b'],
+            $_POST['c'],
+            $_POST['d'],
+            $_POST['knc_jawaban'],
+            $_POST['id']
+        );
+
     } else {
+
         UploadBanner($nama_file_unik);
-        mysqli_query($koneksi, "UPDATE tbl_soal SET
-            soal='$_POST[soal]',
-            a='$_POST[a]',
-            b='$_POST[b]',
-            c='$_POST[c]',
-            d='$_POST[d]',
-            knc_jawaban='$_POST[knc_jawaban]',
-            gambar='$nama_file_unik'
-            WHERE id_soal='$_POST[id]'");
+
+        $sql = "UPDATE tbl_soal SET
+            soal=?, a=?, b=?, c=?, d=?, knc_jawaban=?, gambar=?
+            WHERE id_soal=?";
+
+        $stmt = mysqli_prepare($koneksi, $sql);
+        mysqli_stmt_bind_param(
+            $stmt,
+            "sssssssi",
+            $_POST['soal'],
+            $_POST['a'],
+            $_POST['b'],
+            $_POST['c'],
+            $_POST['d'],
+            $_POST['knc_jawaban'],
+            $nama_file_unik,
+            $_POST['id']
+        );
     }
+
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 
     header("Location: ../../media.php?module=soal");
     exit;
@@ -117,6 +141,7 @@ elseif ($module === 'soal' && $act === 'aktif') {
     header("Location: ../../media.php?module=soal");
     exit;
 }
+
 
 
 
