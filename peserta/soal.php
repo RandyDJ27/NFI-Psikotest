@@ -83,7 +83,7 @@
     								echo "
     								<div class='text-center mt-5 mb-3'>
         							<p class='text-muted'>Klik tombol di bawah untuk melanjutkan ke tahap berikutnya:</p>
-        							<a href='http://localhost/tes-koran/public/index.php' target='_blank' class='btn btn-primary btn-lg px-5 shadow-lg font-weight-bold' style='border-radius: 30px;'>
+        							<a href='https://kreplin.infinityfreeapp.com/tes-koran/index.php' target='_blank' class='btn btn-primary btn-lg px-5 shadow-lg font-weight-bold' style='border-radius: 30px;'>
             						Selanjutnya <i class='fas fa-arrow-right ml-2'></i>
         							</a>
     								</div>";
@@ -352,4 +352,5 @@ window.addEventListener("load", function() {
 	document.addEventListener('selectstart', function(e) {
 		e.preventDefault();
 	});
+
 </script>
