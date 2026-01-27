@@ -15,7 +15,6 @@ mysqli_ssl_set($koneksi, NULL, NULL, NULL, NULL, NULL);
 // Parameter: objek_koneksi, host, user, password, database, port, flag
 if (!mysqli_real_connect($koneksi, $host, $user, $pass, $db, 3306, MYSQLI_CLIENT_SSL)) {
     die("Gagal menyambung ke MySQL: " . mysqli_connect_error());
+    
 }
 ?>
-
-
