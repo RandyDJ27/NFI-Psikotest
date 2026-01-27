@@ -105,7 +105,7 @@ echo "<div class='text-center mt-5'>";
     echo "
     <div class='mt-2'>
         <a class='btn btn-primary btn-lg shadow-lg' 
-           href='http://200.200.0.208/tes-koran/public/index.php' 
+           href='https://kreplin.infinityfreeapp.com/tes-koran/' 
            target='_blank' 
            style='border-radius: 50px; padding: 10px 40px; font-weight: bold; font-size: 1.5rem;'>
            Selanjutnya <i class='fas fa-arrow-right ml-2'></i>
@@ -121,4 +121,5 @@ echo "</div>";
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
+
         </div>		
