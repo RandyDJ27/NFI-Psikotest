@@ -198,17 +198,18 @@ switch ($act) {
                           </div>
                         </div>
 
-                        <div class='form-group'>
-                          <label for='inputEmail3' class='col-sm-2 control-label'>Kunci Jawaban</label>
-                          <div class='col-sm-4'>
-                            <select name='knc_jawaban' class='form-control'>
-                            <option value='a'>A</option>
-                            <option value='b'>B</option>
-                            <option value='c'>C</option>
-                            <option value='d'>D</option>
-                            </select>
-                          </div>
-                        </div>
+                       <div class="form-group">
+                      <label class="col-sm-2 control-label">Kunci Jawaban</label>
+                      <div class="col-sm-4">
+                      <select name="knc_jawaban" class="form-control" required>
+                      <option value="a" <?php if ($r['knc_jawaban']=='a') echo 'selected'; ?>>A</option>
+                      <option value="b" <?php if ($r['knc_jawaban']=='b') echo 'selected'; ?>>B</option>
+                      <option value="c" <?php if ($r['knc_jawaban']=='c') echo 'selected'; ?>>C</option>
+                      <option value="d" <?php if ($r['knc_jawaban']=='d') echo 'selected'; ?>>D</option>
+                      </select>
+                      </div>
+                      </div>
+
 
                         <div class='form-group'>
                           <label for='inputEmail3' class='col-sm-2 control-label'></label>
@@ -383,6 +384,7 @@ switch ($act) {
   </script>
 </div>
 </div>
+
 
 
 
