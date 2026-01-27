@@ -22,7 +22,7 @@
  include "../config/koneksi.php";
  include "../config/library.php";
 
-       if(isset($_POST['submit'])){
+       if(isset($_POST['pilihan']) && isset($_POST['id'])){
 			$pilihan=$_POST["pilihan"];
 			$id_soal=$_POST["id"];
 			$jumlah=$_POST['jumlah'];
@@ -123,3 +123,4 @@ echo "</div>";
             <!-- /.container-fluid -->
 
         </div>		
+
