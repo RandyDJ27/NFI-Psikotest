@@ -198,15 +198,16 @@ switch ($act) {
                           </div>
                         </div>
 
-                       <div class="form-group">
-                      <label class="col-sm-2 control-label">Kunci Jawaban</label>
-                      <div class="col-sm-4">
-                      <select name="knc_jawaban" class="form-control" required>
-                      <option value="a" <?php if ($r['knc_jawaban']=='a') echo 'selected'; ?>>A</option>
-                      <option value="b" <?php if ($r['knc_jawaban']=='b') echo 'selected'; ?>>B</option>
-                      <option value="c" <?php if ($r['knc_jawaban']=='c') echo 'selected'; ?>>C</option>
-                      <option value="d" <?php if ($r['knc_jawaban']=='d') echo 'selected'; ?>>D</option>
-                      </select>
+                    echo "
+<div class='form-group'>
+  <label class='col-sm-2 control-label'>Kunci Jawaban</label>
+  <div class='col-sm-4'>
+    <select name='knc_jawaban' class='form-control' required>
+      <option value='a'>A</option>
+      <option value='b'>B</option>
+      <option value='c'>C</option>
+      <option value='d'>D</option>
+    </select>
                       </div>
                       </div>
 
@@ -287,15 +288,16 @@ switch ($act) {
                           </div>
                         </div>
 
-                        <div class='form-group'>
-                          <label for='inputEmail3' class='col-sm-2 control-label'>Kunci Jawaban</label>
-                          <div class='col-sm-4'>
-                            <select name='knc_jawaban' id='knc_jawaban' class='form-control'>
-                            <option value='a'>A</option>
-                            <option value='b'>B</option>
-                            <option value='c'>C</option>
-                            <option value='d'>D</option>
-                            </select>
+                     echo "
+<div class='form-group'>
+  <label class='col-sm-2 control-label'>Kunci Jawaban</label>
+  <div class='col-sm-4'>
+    <select name='knc_jawaban' class='form-control' required>
+      <option value='a' ".($r['knc_jawaban']=='a'?'selected':'').">A</option>
+      <option value='b' ".($r['knc_jawaban']=='b'?'selected':'').">B</option>
+      <option value='c' ".($r['knc_jawaban']=='c'?'selected':'').">C</option>
+      <option value='d' ".($r['knc_jawaban']=='d'?'selected':'').">D</option>
+    </select>
                           </div>
                         </div>
 
@@ -379,6 +381,7 @@ switch ($act) {
 
 </div>
 </div>
+
 
 
 
