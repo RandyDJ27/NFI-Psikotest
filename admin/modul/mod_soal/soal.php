@@ -289,11 +289,11 @@ switch ($act) {
                         <div class='form-group'>
                           <label for='inputEmail3' class='col-sm-2 control-label'>Kunci Jawaban</label>
                           <div class='col-sm-4'>
-                            <select name="knc_jawaban" class="form-control" required>
-                            <option value="A" <?= ($r['knc_jawaban'] == 'A') ? 'selected' : '' ?>>A</option>
-                            <option value="B" <?= ($r['knc_jawaban'] == 'B') ? 'selected' : '' ?>>B</option>
-                            <option value="C" <?= ($r['knc_jawaban'] == 'C') ? 'selected' : '' ?>>C</option>
-                            <option value="D" <?= ($r['knc_jawaban'] == 'D') ? 'selected' : '' ?>>D</option>
+                            <select name='knc_jawaban' id='knc_jawaban' class='form-control'>
+                            <option value='a'>A</option>
+                            <option value='b'>B</option>
+                            <option value='c'>C</option>
+                            <option value='d'>D</option>
                             </select>
                           </div>
                         </div>
@@ -376,7 +376,13 @@ switch ($act) {
   <!-- /#page-wrapper -->
 
 
-
+  <script type="text/javascript">
+    var $ = jQuery;
+    $('#knc_jawaban').val('<?php echo $r['
+      knc_jawaban '];?>');
+  </script>
+</div>
+</div>
 
 
 
