@@ -54,7 +54,7 @@
             </a>
         </ul>
     </div> 
-    
+
     <div class="col">
         <div id="page-wrapper">
             <div class="container-fluid mt-3">
@@ -68,13 +68,11 @@
 $aksi = "modul/mod_hasiltes/aksi_hasiltes.php";
 $act = isset($_GET['act']) ? $_GET['act'] : '';
 
-// Ambil nilai pencarian nama dan tanggal jika ada
 $cari = isset($_GET['cari']) ? mysqli_real_escape_string($koneksi, $_GET['cari']) : '';
 $tgl_cari = isset($_GET['tgl']) ? mysqli_real_escape_string($koneksi, $_GET['tgl']) : '';
 
 switch ($act) {
     default:
-        // Logika Gabungan Filter Pencarian Nama dan Tanggal
         $where_clause = "";
         if ($cari != "") {
             $where_clause .= " AND (tbl_user.nama LIKE '%$cari%' OR tbl_user.username LIKE '%$cari%')";
@@ -99,16 +97,13 @@ switch ($act) {
             <div class='col-lg-7'>
                 <form method='GET' action='' class='form-inline justify-content-end'>
                     <input type='hidden' name='module' value='hasiltes'>
-                    
                     <input type="date" name="tgl" class="form-control form-control-sm mr-2" value="<?php echo $tgl_cari; ?>">
-                    
                     <div class='input-group'>
                         <input type='text' name='cari' class='form-control form-control-sm' placeholder='Nama...' value='<?php echo $cari; ?>'>
                         <div class='input-group-append'>
                             <button class='btn btn-success btn-sm' type='submit'><i class='fa fa-search'></i> Filter</button>
                         </div>
                     </div>
-                    
                     <?php if($cari != "" || $tgl_cari != ""): ?>
                         <a href='?module=hasiltes' class='btn btn-secondary btn-sm ml-2'>Reset</a>
                     <?php endif; ?>
@@ -116,7 +111,7 @@ switch ($act) {
             </div>
         </div>
 
-        <table class='table table-hover mt-3'>
+        <table class='table table-hover mt-3' id="tabel-hasil-tes">
             <thead>
                 <tr align='center'>
                     <th>No</th>
@@ -128,8 +123,7 @@ switch ($act) {
                     <th>Nilai</th>
                     <th>Tanggal Tes</th>
                     <th>Keterangan</th>
-                    <th>Aksi</th>
-                </tr>
+                    <th class="no-export">Aksi</th> </tr>
             </thead>
             <tbody>
 <?php
@@ -146,7 +140,7 @@ switch ($act) {
                     <td align='center'>$r[score]</td>
                     <td>$tgl</td>
                     <td align='center'>$r[keterangan]</td>
-                    <td align='center'>
+                    <td align='center' class='no-export'>
                         <input type='button' value='Hapus' class='btn btn-outline-danger btn-sm' onclick=\"if(confirm('Yakin hapus data ini?')) window.location.href='$aksi?module=hasiltes&act=hapus&id=$r[id_nilai]';\">
                     </td>
                   </tr>";
@@ -170,7 +164,7 @@ switch ($act) {
                 <a class='btn btn-success' href='?module=hasiltes' role='button'><i class='fa fa-reply fa-fw mr-3'></i>Kembali</a>     
             </div>
         </div>
-        <table class='table table-hover mt-3'>
+        <table class='table table-hover mt-3' id="tabel-lulus">
             <thead><tr align='center'><th>No</th><th>Nama</th><th>Email</th><th>Benar</th><th>Salah</th><th>Kosong</th><th>Nilai</th><th>Keterangan</th><th>Tanggal Tes</th></tr></thead>
             <tbody>
 <?php
@@ -195,7 +189,7 @@ switch ($act) {
                 <a class='btn btn-success' href='?module=hasiltes' role='button'><i class='fa fa-reply fa-fw mr-3'></i>Kembali</a>     
             </div>
         </div>
-        <table class='table table-hover mt-3'>
+        <table class='table table-hover mt-3' id="tabel-tidak-lulus">
             <thead><tr align='center'><th>No</th><th>Nama</th><th>Email</th><th>Benar</th><th>Salah</th><th>Kosong</th><th>Nilai</th><th>Keterangan</th><th>Tanggal Tes</th></tr></thead>
             <tbody>
 <?php
@@ -252,6 +246,30 @@ switch ($act) {
             </div>
         </div>
     </div>
-
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+function exportToExcel() {
+    // Pilih tabel berdasarkan ID
+    const table = document.getElementById("tabel-hasil-tes");
+    if (!table) return alert("Tabel tidak ditemukan!");
+
+    // Buat salinan tabel untuk dimodifikasi (menghapus kolom aksi)
+    const tableClone = table.cloneNode(true);
+    const rows = tableClone.querySelectorAll("tr");
+
+    rows.forEach(row => {
+        // Hapus elemen yang memiliki class 'no-export' (Kolom Aksi)
+        const noExportElements = row.querySelectorAll(".no-export");
+        noExportElements.forEach(el => el.remove());
+    });
+
+    // Konversi ke format Excel
+    const wb = XLSX.utils.table_to_book(tableClone, { sheet: "Hasil Psikotes" });
+    
+    // Download file
+    const dateStr = new Date().toISOString().slice(0,10);
+    XLSX.writeFile(wb, "Hasil_Psikotes_" + dateStr + ".xlsx");
+}
+</script>
