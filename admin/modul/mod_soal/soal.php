@@ -1,154 +1,198 @@
 <?php
-if (!defined('BASEPATH')) {
-  session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
-include "../../../config/koneksi.php";
+if (empty($_SESSION['username']) && empty($_SESSION['passuser'])) {
+    echo "<center>Untuk mengakses modul, Anda harus login <br>
+          <a href='../../index.php'><b>LOGIN</b></a></center>";
+    exit;
+}
 
-$module = $_GET['module'];
-$act    = $_GET['act'];
+$aksi = "modul/mod_soal/aksi_soal.php";
+$act  = $_GET['act'] ?? '';
+?>
 
+<div class="card-header bg-danger text-white">
+  Kelola Soal
+</div>
+
+<div class="card-body">
+
+<?php
 switch ($act) {
 
-/* ==========================
-   TAMBAH SOAL
-========================== */
+/* ===================== DEFAULT ===================== */
+default:
+echo "
+<div class='row mb-3'>
+  <div class='col-lg-6'>
+    <button class='btn btn-primary'
+      onclick=\"window.location.href='?module=soal&act=tambahsoal';\">
+      <i class='fa fa-plus mr-1'></i>Tambah Soal
+    </button>
+  </div>
+</div>
+
+<table class='table table-hover'>
+<thead>
+<tr align='center'>
+  <th>No</th>
+  <th>Pertanyaan</th>
+  <th>Aktif</th>
+  <th>Aksi</th>
+  <th>Lihat</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>";
+
+$tampil = mysqli_query($koneksi, "SELECT * FROM tbl_soal ORDER BY id_soal DESC");
+$no = 1;
+
+while ($r = mysqli_fetch_assoc($tampil)) {
+    $soal = substr(strip_tags($r['soal']), 0, 50);
+
+    echo "
+    <tr>
+      <td>$no</td>
+      <td>$soal...</td>
+      <td align='center'>{$r['aktif']}</td>
+      <td>
+        <a class='btn btn-outline-primary btn-sm'
+           href='?module=soal&act=editsoal&id={$r['id_soal']}'>
+           <i class='fa fa-edit'></i> Edit
+        </a>
+        <a class='btn btn-outline-danger btn-sm'
+           href='$aksi?module=soal&act=hapus&id={$r['id_soal']}'
+           onclick=\"return confirm('Hapus soal ini?')\">
+           <i class='fa fa-trash'></i> Hapus
+        </a>
+      </td>
+      <td>
+        <a class='btn btn-outline-info btn-sm'
+           href='?module=soal&act=viewsoal&id={$r['id_soal']}'>
+           <i class='fa fa-eye'></i> Lihat
+        </a>
+      </td>
+      <td>";
+
+      if ($r['aktif'] == 'Y') {
+          echo "<a class='btn btn-outline-dark btn-sm'
+                href='$aksi?module=soal&act=nonaktif&id={$r['id_soal']}'>
+                Non Aktif
+                </a>";
+      } else {
+          echo "<a class='btn btn-outline-success btn-sm'
+                href='$aksi?module=soal&act=aktif&id={$r['id_soal']}'>
+                Aktifkan
+                </a>";
+      }
+
+    echo "</td></tr>";
+    $no++;
+}
+
+echo "</tbody></table>";
+break;
+
+/* ===================== TAMBAH ===================== */
 case "tambahsoal":
-?>
-<form class="form-horizontal" method="POST" action="modul/mod_soal/aksi_soal.php?module=soal&act=input">
-  <div class="box-body">
+echo "
+<h4>Tambah Soal</h4><hr>
+<form method='POST' action='$aksi?module=soal&act=input' enctype='multipart/form-data'>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Soal</label>
-      <div class="col-sm-10">
-        <textarea name="soal" class="form-control" rows="4" required></textarea>
-      </div>
-    </div>
+<div class='form-group'>
+<label>Soal</label>
+<textarea name='soal' class='form-control' rows='6' required></textarea>
+</div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban A</label>
-      <div class="col-sm-10">
-        <input type="text" name="a" class="form-control" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban A</label>
+<input type='text' name='a' class='form-control' required></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban B</label>
-      <div class="col-sm-10">
-        <input type="text" name="b" class="form-control" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban B</label>
+<input type='text' name='b' class='form-control' required></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban C</label>
-      <div class="col-sm-10">
-        <input type="text" name="c" class="form-control" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban C</label>
+<input type='text' name='c' class='form-control' required></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban D</label>
-      <div class="col-sm-10">
-        <input type="text" name="d" class="form-control" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban D</label>
+<input type='text' name='d' class='form-control' required></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Kunci Jawaban</label>
-      <div class="col-sm-4">
-        <select name="knc_jawaban" class="form-control" required>
-          <option value="">- Pilih -</option>
-          <option value="a">A</option>
-          <option value="b">B</option>
-          <option value="c">C</option>
-          <option value="d">D</option>
-        </select>
-      </div>
-    </div>
+<div class='form-group'>
+<label>Kunci Jawaban</label>
+<select name='knc_jawaban' class='form-control' required>
+<option value='a'>A</option>
+<option value='b'>B</option>
+<option value='c'>C</option>
+<option value='d'>D</option>
+</select>
+</div>
 
-  </div>
-
-  <div class="box-footer">
-    <button type="submit" class="btn btn-primary">Simpan</button>
-    <button type="button" class="btn btn-default" onclick="self.history.back()">Batal</button>
-  </div>
-</form>
-<?php
+<button class='btn btn-primary'>Simpan</button>
+<button type='button' class='btn btn-danger' onclick='history.back()'>Batal</button>
+</form>";
 break;
 
-
-/* ==========================
-   EDIT SOAL
-========================== */
+/* ===================== EDIT ===================== */
 case "editsoal":
+$edit = mysqli_query($koneksi, "SELECT * FROM tbl_soal WHERE id_soal='$_GET[id]'");
+$r = mysqli_fetch_assoc($edit);
 
-$id = $_GET['id'];
-$q  = mysqli_query($koneksi, "SELECT * FROM soal WHERE id_soal='$id'");
-$r  = mysqli_fetch_array($q);
-?>
+echo "
+<h4>Edit Soal</h4><hr>
+<form method='POST' action='$aksi?module=soal&act=update' enctype='multipart/form-data'>
+<input type='hidden' name='id' value='{$r['id_soal']}'>
 
-<form class="form-horizontal" method="POST" action="modul/mod_soal/aksi_soal.php?module=soal&act=update">
-<input type="hidden" name="id" value="<?php echo $r['id_soal']; ?>">
+<div class='form-group'>
+<label>Soal</label>
+<textarea name='soal' class='form-control' rows='6' required>{$r['soal']}</textarea>
+</div>
 
-  <div class="box-body">
+<div class='form-group'><label>Jawaban A</label>
+<input type='text' name='a' value='{$r['a']}' class='form-control'></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Soal</label>
-      <div class="col-sm-10">
-        <textarea name="soal" class="form-control" rows="4" required><?php echo $r['soal']; ?></textarea>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban B</label>
+<input type='text' name='b' value='{$r['b']}' class='form-control'></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban A</label>
-      <div class="col-sm-10">
-        <input type="text" name="a" class="form-control" value="<?php echo $r['a']; ?>" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban C</label>
+<input type='text' name='c' value='{$r['c']}' class='form-control'></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban B</label>
-      <div class="col-sm-10">
-        <input type="text" name="b" class="form-control" value="<?php echo $r['b']; ?>" required>
-      </div>
-    </div>
+<div class='form-group'><label>Jawaban D</label>
+<input type='text' name='d' value='{$r['d']}' class='form-control'></div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban C</label>
-      <div class="col-sm-10">
-        <input type="text" name="c" class="form-control" value="<?php echo $r['c']; ?>" required>
-      </div>
-    </div>
+<div class='form-group'>
+<label>Kunci Jawaban</label>
+<select name='knc_jawaban' class='form-control'>
+  <option value='a' ".($r['knc_jawaban']=='a'?'selected':'').">A</option>
+  <option value='b' ".($r['knc_jawaban']=='b'?'selected':'').">B</option>
+  <option value='c' ".($r['knc_jawaban']=='c'?'selected':'').">C</option>
+  <option value='d' ".($r['knc_jawaban']=='d'?'selected':'').">D</option>
+</select>
+</div>
 
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Jawaban D</label>
-      <div class="col-sm-10">
-        <input type="text" name="d" class="form-control" value="<?php echo $r['d']; ?>" required>
-      </div>
-    </div>
-
-    <!-- INI BAGIAN PENTING (TAMPILAN TETAP ASLI) -->
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Kunci Jawaban</label>
-      <div class="col-sm-4">
-        <select name="knc_jawaban" class="form-control" required>
-          <option value="a" <?php if($r['knc_jawaban']=='a') echo 'selected'; ?>>A</option>
-          <option value="b" <?php if($r['knc_jawaban']=='b') echo 'selected'; ?>>B</option>
-          <option value="c" <?php if($r['knc_jawaban']=='c') echo 'selected'; ?>>C</option>
-          <option value="d" <?php if($r['knc_jawaban']=='d') echo 'selected'; ?>>D</option>
-        </select>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="box-footer">
-    <button type="submit" class="btn btn-primary">Update</button>
-    <button type="button" class="btn btn-default" onclick="self.history.back()">Batal</button>
-  </div>
-</form>
-
-<?php
+<button class='btn btn-primary'>Update</button>
+<button type='button' class='btn btn-danger' onclick='history.back()'>Batal</button>
+</form>";
 break;
+
+/* ===================== VIEW ===================== */
+case "viewsoal":
+$v = mysqli_query($koneksi, "SELECT * FROM tbl_soal WHERE id_soal='$_GET[id]'");
+$t = mysqli_fetch_assoc($v);
+
+echo "
+<a class='btn btn-success mb-3' href='?module=soal'>Kembali</a>
+<h5>Soal:</h5>{$t['soal']}<br><br>
+<h5>Jawaban:</h5>
+A. {$t['a']}<br>
+B. {$t['b']}<br>
+C. {$t['c']}<br>
+D. {$t['d']}<br><br>
+<b>Kunci Jawaban: {$t['knc_jawaban']}</b>";
+break;
+
 }
 ?>
+
+</div>
