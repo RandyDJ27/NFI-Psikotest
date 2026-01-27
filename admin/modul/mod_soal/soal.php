@@ -377,13 +377,9 @@ switch ($act) {
   <!-- /#page-wrapper -->
 
 
-  <script type="text/javascript">
-    var $ = jQuery;
-    $('#knc_jawaban').val('<?php echo $r['
-      knc_jawaban '];?>');
-  </script>
 </div>
 </div>
+
 
 
 
