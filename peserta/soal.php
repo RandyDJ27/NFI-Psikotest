@@ -144,3 +144,50 @@ document.addEventListener("visibilitychange", () => {
 	}
 });
 </script>
+
+	<!-- ======== FITUR TAMBAHAN ======== -->
+
+<!-- Watermark nama peserta -->
+<?php if (!empty($_SESSION['username'])): ?>
+	<style>
+		#watermark {
+			position: fixed;
+			top: 30%;
+			left: 0;
+			width: 100%;
+			height: 10%;
+			pointer-events: none;
+			opacity: 0.50;
+			font-size: 8rem;
+			color: gray;
+			text-align: center;
+			transform: rotate(0deg);
+			z-index: 9999;
+			user-select: none;
+		}
+	</style>
+	<div id="watermark"><?= htmlspecialchars($_SESSION['username']) ?></div>
+<?php endif; ?>
+
+	<!-- Proteksi Screenshot -->
+<script>
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'PrintScreen') {
+			alert('Fitur screenshot dinonaktifkan untuk menjaga kerahasiaan tes.');
+			navigator.clipboard.writeText('');
+		}
+	});
+	document.addEventListener('keyup', function(e) {
+		if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 'p')) {
+			alert('Screenshot / Print tidak diizinkan selama ujian!');
+			e.preventDefault();
+		}
+	});
+	document.addEventListener('contextmenu', function(e) {
+		e.preventDefault();
+	});
+	document.addEventListener('selectstart', function(e) {
+		e.preventDefault();
+	});
+</script>
+
