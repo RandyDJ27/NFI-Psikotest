@@ -1,41 +1,107 @@
 <?php
-ob_start(); // Menahan output agar redirect aman
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+<?php
 session_start();
-
-// Matikan error reporting di layar agar tidak merusak header redirect
-error_reporting(0);
-ini_set('display_errors', 0);
-
-require_once "../../../config/koneksi.php";
-
-// Cek login: Jika sesi hilang, jangan langsung redirect pake header kalau ada potensi error
-if (empty($_SESSION['username']) || empty($_SESSION['passuser'])) {
-    echo "<script>alert('Sesi habis, silakan login ulang'); window.location='/index.php';</script>";
-    exit;
+ if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
+  echo "<link href='style.css' rel='stylesheet' type='text/css'>
+ <center>Untuk mengakses modul, Anda harus login <br>";
+  echo "<a href=../../index.php><b>LOGIN</b></a></center>";
 }
+else{
+include "../../../config/koneksi.php";
+include "../../../config/library.php";
+include "../../../config/fungsi_thumb.php";
 
-$module = $_GET['module'] ?? '';
-$act    = $_GET['act'] ?? '';
-$tgl_sekarang = date("Y-m-d");
 
-if ($module === 'soal' && $act === 'input') {
-    $soal = $_POST['soal'];
-    $a = $_POST['a'];
-    $b = $_POST['b'];
-    $c = $_POST['c'];
-    $d = $_POST['d'];
-    $knc = $_POST['knc_jawaban'];
+$module=$_GET['module'];
+$act=$_GET['act'];
 
-    // Gunakan query biasa jika prepared statement kamu bermasalah dengan versi PHP di Azure
-    $query = "INSERT INTO tbl_soal (soal, a, b, c, d, knc_jawaban, tanggal) 
-              VALUES ('$soal', '$a', '$b', '$c', '$d', '$knc', '$tgl_sekarang')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: /admin/media.php?module=soal");
-    } else {
-        echo "Error: " . mysqli_error($koneksi);
-    }
-    exit;
+// Input soal
+if ($module=='soal' AND $act=='input'){
+  $lokasi_file    = $_FILES['fupload']['tmp_name'];
+  $tipe_file      = $_FILES['fupload']['type'];
+  $nama_file      = $_FILES['fupload']['name'];
+  $acak           = rand(1,99);
+  $nama_file_unik = $acak.$nama_file;
+  
+  // Apabila ada gambar yang diupload
+  if (!empty($lokasi_file)){
+    UploadBanner($nama_file_unik);
+  mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban,tanggal,gambar) 
+  				VALUES('$_POST[soal]',
+					   '$_POST[a]',
+					   '$_POST[b]',
+					   '$_POST[c]',
+					   '$_POST[d]',
+					   '$_POST[knc_jawaban]',
+                       '$tgl_sekarang',
+                       '$nama_file_unik')");
+  }
+  else{
+  mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban) 
+  				VALUES('$_POST[soal]',
+					   '$_POST[a]',
+					   '$_POST[b]',
+					   '$_POST[c]',
+					   '$_POST[d]',
+					   '$_POST[knc_jawaban]')");
+  }
+    header('location:../../media.php?module='.$module);
 }
-ob_end_flush();
+//Hapus Soal
+elseif ($module=='soal' AND $act=='hapus') {
+	mysqli_query($koneksi, "DELETE FROM tbl_soal WHERE id_soal='$_GET[id]'");
+    header('location:../../media.php?module='.$module);
+}
+// Update soal
+elseif ($module=='soal' AND $act=='update'){
+  $lokasi_file    = $_FILES['fupload']['tmp_name'];
+  $tipe_file      = $_FILES['fupload']['type'];
+  $nama_file      = $_FILES['fupload']['name'];
+  $acak           = rand(1,99);
+  $nama_file_unik = $acak.$nama_file; 
+
+  // Apabila gambar tidak diganti
+  if (empty($lokasi_file)){
+    mysql_query("UPDATE tbl_soal SET soal       = '$_POST[soal]',
+                                   			 a  = '$_POST[a]' ,
+								             b  = '$_POST[b]',
+											 c  = '$_POST[c]',
+											 d  = '$_POST[d]',
+											knc_jawaban= '$_POST[knc_jawaban]'
+                             WHERE id_soal   = '$_POST[id]'");
+  }
+  else{
+    UploadBanner($nama_file_unik);
+    mysql_query("UPDATE tbl_soal SET soal       = '$_POST[soal]',
+                                   			 a  = '$_POST[a]' ,
+								             b  = '$_POST[b]',
+											 c  = '$_POST[c]',
+											 d  = '$_POST[d]',
+											knc_jawaban= '$_POST[knc_jawaban]',
+                                   gambar      = '$nama_file_unik' 
+                             WHERE id_soal   = '$_POST[id]'");
+  }
+  header('location:../../media.php?module='.$module);
+}
+//Pengaktifan dan Pengnonaktifan
+elseif ($module=='soal' AND $act=='nonaktif'){
+$aktif='N';
+    mysqli_query($koneksi, "UPDATE tbl_soal SET aktif  = '$aktif'  WHERE id_soal='$_GET[id]'");
+  header('location:../../media.php?module='.$module);
+  echo "tes";
+  
+ }
+elseif ($module=='soal' AND $act=='aktif'){
+$aktif='Y';
+    mysqli_query($koneksi, "UPDATE tbl_soal SET aktif  = '$aktif'  WHERE id_soal='$_GET[id]'");
+  header('location:../../media.php?module='.$module);
+  echo "tes";
+  
+ }
+
+}
 ?>
