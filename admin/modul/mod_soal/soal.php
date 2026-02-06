@@ -89,7 +89,7 @@ if (session_status() == PHP_SESSION_NONE) {
   echo "<a href=../../index.php><b>LOGIN</b></a></center>";
 }
 else{
-$aksi="modul/mod_soal/aksi_soal.php";
+$aksi = "/admin/modul/mod_soal/aksi_soal.php";
 $act = isset($_GET['act']) ? $_GET['act'] : '';
 switch ($act) {    
 // switch($_GET['act']){
@@ -383,3 +383,4 @@ switch ($act) {
   </script>
 </div>
 </div>
+
