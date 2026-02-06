@@ -27,7 +27,7 @@ default:
 echo "
 <div class='row mb-3'>
   <div class='col-lg-6'>
-    <button class='btn btn-primary'
+    <button class='btn btn-primary' 
       onclick=\"window.location.href='?module=soal&act=tambahsoal';\">
       <i class='fa fa-plus mr-1'></i>Tambah Soal
     </button>
@@ -59,31 +59,31 @@ while ($r = mysqli_fetch_assoc($tampil)) {
       <td>$soal...</td>
       <td align='center'>{$r['aktif']}</td>
       <td>
-        <a class='btn btn-outline-primary btn-sm'
+        <a class='btn btn-outline-primary btn-sm' 
            href='?module=soal&act=editsoal&id={$r['id_soal']}'>
            <i class='fa fa-edit'></i> Edit
         </a>
-        <a class='btn btn-outline-danger btn-sm'
-           href='$aksi?module=soal&act=hapus&id={$r['id_soal']}'
+        <a class='btn btn-outline-danger btn-sm' 
+           href='$aksi?module=soal&act=hapus&id={$r['id_soal']}' 
            onclick=\"return confirm('Hapus soal ini?')\">
            <i class='fa fa-trash'></i> Hapus
         </a>
       </td>
       <td>
-        <a class='btn btn-outline-info btn-sm'
+        <a class='btn btn-outline-info btn-sm' 
            href='?module=soal&act=viewsoal&id={$r['id_soal']}'>
            <i class='fa fa-eye'></i> Lihat
         </a>
       </td>
       <td>";
-
+      
       if ($r['aktif'] == 'Y') {
-          echo "<a class='btn btn-outline-dark btn-sm'
+          echo "<a class='btn btn-outline-dark btn-sm' 
                 href='$aksi?module=soal&act=nonaktif&id={$r['id_soal']}'>
                 Non Aktif
                 </a>";
       } else {
-          echo "<a class='btn btn-outline-success btn-sm'
+          echo "<a class='btn btn-outline-success btn-sm' 
                 href='$aksi?module=soal&act=aktif&id={$r['id_soal']}'>
                 Aktifkan
                 </a>";
@@ -104,7 +104,8 @@ echo "
 
 <div class='form-group'>
 <label>Soal</label>
-<textarea name='soal' class='form-control' rows='6' required></textarea>
+<textarea name='soal' id='isi_soal' class='form-control' rows='6'></textarea>
+<small class='text-muted'>*Wajib diisi</small>
 </div>
 
 <div class='form-group'><label>Jawaban A</label>
@@ -129,7 +130,7 @@ echo "
 </select>
 </div>
 
-<button class='btn btn-primary'>Simpan</button>
+<button type='submit' class='btn btn-primary' onclick=\"nicEditors.findEditor('isi_soal').saveContent();\">Simpan</button>
 <button type='button' class='btn btn-danger' onclick='history.back()'>Batal</button>
 </form>";
 break;
@@ -146,24 +147,24 @@ echo "
 
 <div class='form-group'>
 <label>Soal</label>
-<textarea name='soal' class='form-control' rows='6' required>{$r['soal']}</textarea>
+<textarea name='soal' id='edit_soal' class='form-control' rows='6'>{$r['soal']}</textarea>
 </div>
 
 <div class='form-group'><label>Jawaban A</label>
-<input type='text' name='a' value='{$r['a']}' class='form-control'></div>
+<input type='text' name='a' value='{$r['a']}' class='form-control' required></div>
 
 <div class='form-group'><label>Jawaban B</label>
-<input type='text' name='b' value='{$r['b']}' class='form-control'></div>
+<input type='text' name='b' value='{$r['b']}' class='form-control' required></div>
 
 <div class='form-group'><label>Jawaban C</label>
-<input type='text' name='c' value='{$r['c']}' class='form-control'></div>
+<input type='text' name='c' value='{$r['c']}' class='form-control' required></div>
 
 <div class='form-group'><label>Jawaban D</label>
-<input type='text' name='d' value='{$r['d']}' class='form-control'></div>
+<input type='text' name='d' value='{$r['d']}' class='form-control' required></div>
 
 <div class='form-group'>
 <label>Kunci Jawaban</label>
-<select name='knc_jawaban' class='form-control'>
+<select name='knc_jawaban' class='form-control' required>
   <option value='a' ".($r['knc_jawaban']=='a'?'selected':'').">A</option>
   <option value='b' ".($r['knc_jawaban']=='b'?'selected':'').">B</option>
   <option value='c' ".($r['knc_jawaban']=='c'?'selected':'').">C</option>
@@ -171,7 +172,7 @@ echo "
 </select>
 </div>
 
-<button class='btn btn-primary'>Update</button>
+<button type='submit' class='btn btn-primary' onclick=\"nicEditors.findEditor('edit_soal').saveContent();\">Update</button>
 <button type='button' class='btn btn-danger' onclick='history.back()'>Batal</button>
 </form>";
 break;
@@ -189,7 +190,7 @@ A. {$t['a']}<br>
 B. {$t['b']}<br>
 C. {$t['c']}<br>
 D. {$t['d']}<br><br>
-<b>Kunci Jawaban: {$t['knc_jawaban']}</b>";
+<b>Kunci Jawaban: ".strtoupper($t['knc_jawaban'])."</b>";
 break;
 
 }
