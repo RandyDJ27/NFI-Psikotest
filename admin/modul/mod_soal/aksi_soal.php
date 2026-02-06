@@ -1,9 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-
-<?php
 session_start();
  if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
   echo "<link href='style.css' rel='stylesheet' type='text/css'>
@@ -16,8 +11,8 @@ include "../../../config/library.php";
 include "../../../config/fungsi_thumb.php";
 
 
-$module=$_GET['module'];
-$act=$_GET['act'];
+$module=$_GET[module];
+$act=$_GET[act];
 
 // Input soal
 if ($module=='soal' AND $act=='input'){
