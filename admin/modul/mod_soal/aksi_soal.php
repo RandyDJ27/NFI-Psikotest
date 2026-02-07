@@ -1,10 +1,9 @@
 <?php
 session_start();
-include "../../config/koneksi.php";
-
-if (!isset($_SESSION['username'])) {
-  header("Location: ../../index.php");
-  exit;
+ if (empty($_SESSION['username']) AND empty($_SESSION['password'])){
+  echo "<link href='style.css' rel='stylesheet' type='text/css'>
+ <center>Untuk mengakses modul, Anda harus login <br>";
+  echo "<a href=../../index.php><b>LOGIN</b></a></center>";
 }
 else{
 include "../../../config/koneksi.php";
