@@ -25,16 +25,19 @@ else{
         $nama_file      = $_FILES['fupload']['name'];
         $acak           = rand(1,99);
         $nama_file_unik = $acak.$nama_file;
-        
+        $tgl_sekarang   = date("Y-m-d"); // Pastikan variabel tanggal ada
+
         if (!empty($lokasi_file)){
             UploadBanner($nama_file_unik);
             mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban,tanggal,gambar) 
                             VALUES('$_POST[soal]', '$_POST[a]', '$_POST[b]', '$_POST[c]', '$_POST[d]', '$_POST[knc_jawaban]', '$tgl_sekarang', '$nama_file_unik')");
         } else {
-            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban) 
-                            VALUES('$_POST[soal]', '$_POST[a]', '$_POST[b]', '$_POST[c]', '$_POST[d]', '$_POST[knc_jawaban]')");
+            // Tambahkan kolom 'gambar' dan 'tanggal' meskipun kosong agar database tidak protes
+            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban,tanggal,gambar) 
+                            VALUES('$_POST[soal]', '$_POST[a]', '$_POST[b]', '$_POST[c]', '$_POST[d]', '$_POST[knc_jawaban]', '$tgl_sekarang', '')");
         }
         header('location:../../media.php?module='.$module);
+    }
     }
 
     // --- PROSES HAPUS SOAL ---
