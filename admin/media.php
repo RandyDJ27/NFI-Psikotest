@@ -36,8 +36,7 @@ if ($sesi_username == NULL || empty($sesi_username)) {
 
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-        <span class="ml-3">Halaman Admin Psikotes</span>
+        <span class="navbar-brand mb-0 h1">Halaman Admin Psikotes</span>
       </nav>
 
       <div class="container-fluid">
@@ -49,12 +48,6 @@ if ($sesi_username == NULL || empty($sesi_username)) {
         }
         ?>
   </div>
- <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
 
   <script src="../asset/js/jquery-3.3.1.slim.min.js"></script>
 
@@ -64,4 +57,5 @@ if ($sesi_username == NULL || empty($sesi_username)) {
   <script src="../asset/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
