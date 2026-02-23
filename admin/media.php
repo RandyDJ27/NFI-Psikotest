@@ -32,15 +32,31 @@ if ($sesi_username == NULL || empty($sesi_username)) {
 
 <body>
   <div id="wrapper">
-    <!-- Navigasi -->
-    <?php
-    if (file_exists('content.php')) {
-        include 'content.php';
-    } else {
-        echo "<p style='color:red;text-align:center;'>⚠️ File content.php tidak ditemukan!</p>";
-    }
-    ?>
+    <?php include "sidebar.php"; ?> 
+
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <span class="ml-3">Halaman Admin Psikotes</span>
+      </nav>
+
+      <div class="container-fluid">
+        <?php
+        if (file_exists('content.php')) {
+            include 'content.php';
+        } else {
+            echo "<p style='color:red;text-align:center;'>⚠️ File content.php tidak ditemukan!</p>";
+        }
+        ?>
   </div>
+ <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+  <script src="../asset/js/jquery-3.3.1.slim.min.js"></script>
 
   <script src="http://localhost/psikotes/asset/dist/sweetalert2.all.min.js"></script>
   <script src="../asset/js/jquery-3.3.1.slim.min.js"></script>
@@ -48,3 +64,4 @@ if ($sesi_username == NULL || empty($sesi_username)) {
   <script src="../asset/js/bootstrap.min.js"></script>
 </body>
 </html>
+
