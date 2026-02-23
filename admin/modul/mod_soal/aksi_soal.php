@@ -3,13 +3,11 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Cek apakah session ada. Kalau kosong, arahkan ke login.
 if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
     echo "<link href='style.css' rel='stylesheet' type='text/css'>
     <center>Untuk mengakses modul, Anda harus login <br>";
-    // Link login saya perbaiki ke folder utama
     echo "<a href='../../../index.php'><b>LOGIN</b></a></center>";
-    exit; // Menghentikan script agar tidak lanjut ke bawah
+    exit;
 }
 else{
     include "../../../config/koneksi.php";
@@ -18,6 +16,9 @@ else{
 
     $module = isset($_GET['module']) ? $_GET['module'] : '';
     $act    = isset($_GET['act']) ? $_GET['act'] : '';
+    
+    // Kita definisikan tanggal hari ini secara manual buat jaga-jaga
+    $tgl_sekarang = date("Y-m-d");
 
     // --- PROSES INPUT SOAL ---
     if ($module=='soal' AND $act=='input'){
@@ -25,19 +26,18 @@ else{
         $nama_file      = $_FILES['fupload']['name'];
         $acak           = rand(1,99);
         $nama_file_unik = $acak.$nama_file;
-        $tgl_sekarang   = date("Y-m-d"); // Pastikan variabel tanggal ada
-
+        
         if (!empty($lokasi_file)){
             UploadBanner($nama_file_unik);
-            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban,tanggal,gambar) 
+            // Query jika ada gambar
+            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal, a, b, c, d, knc_jawaban, tanggal, gambar) 
                             VALUES('$_POST[soal]', '$_POST[a]', '$_POST[b]', '$_POST[c]', '$_POST[d]', '$_POST[knc_jawaban]', '$tgl_sekarang', '$nama_file_unik')");
         } else {
-            // Tambahkan kolom 'gambar' dan 'tanggal' meskipun kosong agar database tidak protes
-            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal,a,b,c,d,knc_jawaban,tanggal,gambar) 
+            // Query jika TIDAK ada gambar (Kolom gambar diisi '' agar tidak error default value)
+            mysqli_query($koneksi, "INSERT INTO tbl_soal(soal, a, b, c, d, knc_jawaban, tanggal, gambar) 
                             VALUES('$_POST[soal]', '$_POST[a]', '$_POST[b]', '$_POST[c]', '$_POST[d]', '$_POST[knc_jawaban]', '$tgl_sekarang', '')");
         }
         header('location:../../media.php?module='.$module);
-    }
     }
 
     // --- PROSES HAPUS SOAL ---
