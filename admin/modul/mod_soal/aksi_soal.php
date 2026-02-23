@@ -4,11 +4,13 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
-    echo "<link href='style.css' rel='stylesheet' type='text/css'>
-    <center>Untuk mengakses modul, Anda harus login <br>";
-    echo "<a href=../../index.php><b>LOGIN</b></a></center>";
-}
+<?php
+session_start();
+// Baris untuk ngecek isi session (Hapus kalau sudah normal)
+// die(print_r($_SESSION)); 
+
+if (empty($_SESSION['username'])){
+    // ... sisa kodingan login ...
 else{
     include "../../../config/koneksi.php";
     include "../../../config/library.php";
